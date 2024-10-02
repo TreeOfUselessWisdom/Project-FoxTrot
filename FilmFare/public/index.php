@@ -1,5 +1,5 @@
 <?php
-include 'aside.php';
+session_start();
 include 'db.php';
 ?>
 
@@ -464,6 +464,9 @@ include 'db.php';
 
 
 
+<?php
+include 'aside.php';
+?>
 
 <?php
 include 'footer.php';

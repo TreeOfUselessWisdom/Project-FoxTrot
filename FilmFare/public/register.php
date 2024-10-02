@@ -29,9 +29,14 @@ if (isset($_POST['register'])) {
 
   // Check if the username and email are available
   if (mysqli_num_rows($result) == 0) {
+    // Hash the password
+    $hashed_password = password_hash ($password, PASSWORD_DEFAULT);
+
     // Insert the new user into the database
-    $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
-    mysqli_query($conn, $query);
+    $query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashed_password);
+    mysqli_stmt_execute($stmt);
 
     // Get the user's ID and store it in the session
     $query = "SELECT * FROM users WHERE username = '$username'";
@@ -39,6 +44,7 @@ if (isset($_POST['register'])) {
     $row = mysqli_fetch_assoc($result);
     $_SESSION['user_id'] = $row['id'];
     $_SESSION['username'] = $row['username'];
+    $_SESSION['logged_in'] = true;
 
     // Clear the output buffer and redirect the user
     ob_end_clean();

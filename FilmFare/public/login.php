@@ -30,8 +30,12 @@ if (isset($_POST['login'])) {
   if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row['password'])) {
+      // Set the session variables
       $_SESSION['user_id'] = $row['id'];
       $_SESSION['username'] = $row['username'];
+      $_SESSION['logged_in'] = true;
+
+      // Clear the output buffer and redirect the user
       ob_end_clean();
       header("Location: index.php");
       exit;
@@ -93,18 +97,15 @@ if (isset($_POST['login'])) {
       <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#service">Services</a></li>
         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="MovieList.php">Movies</a></li>
-        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="Purchase.php">Booking</a></li>
+        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="Purchase.php"> Booking</a></li>
         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#testimonial">Testimonial</a></li>
-        <?php if (isset($_SESSION['user_id'])) { ?>
-  <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#"><?php echo (isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'); ?></a></li>
+        <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) { ?>
+  <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#"><?php echo $_SESSION['username']; ?></a></li>
   <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark order-1 order-lg-0 fw-medium" href="logout.php">Logout</a></li>
 <?php } else { ?>
   <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="login.php">Login</a></li>
   <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark order-1 order-lg-0 fw-medium" href="register.php">Sign Up</a></li>
 <?php } ?>
-        <?php if (isset($_SESSION['username'])) { ?>
-          <li class="nav-item px-3 px-xl-4"><span class="nav-link fw-medium" aria-current="page">Welcome, <?php echo $_SESSION['username']; ?>!</span></li>
-        <?php } ?>
         <li class="nav-item dropdown px-3 px-lg-0"> <a class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">EN</a>
           <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" style="border-radius:0.3rem;" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#!">EN</a></li>
