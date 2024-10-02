@@ -49,8 +49,8 @@
       <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#service">Services</a></li>
         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="MovieList.php">Movies</a></li>
-        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="Purchase.php">Booking</a></li>
-        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#testimonial">Testimonial</a></li>
+        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#destination">Top Picks</a></li>
+        
         <?php if (isset($_SESSION['user_id'])) { ?>
           <li class="nav-item px-3 px-xl-4"><span class="nav-link fw-medium" aria-current="page">Welcome, <?php echo $_SESSION['username']; ?>!</span></li>
           <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark order-1 order-lg-0 fw-medium" href="logout.php">Logout</a></li>

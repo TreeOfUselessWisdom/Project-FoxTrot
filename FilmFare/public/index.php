@@ -303,9 +303,6 @@ include 'db.php';
                 </div>
               </div>
             </div>
-            <div class="text-center">
-              <a class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow" id="Button_new" href="#!" role="button">Explore More Packages</a>
-            </div>
           </div>
           <!-- end of .container-->
         

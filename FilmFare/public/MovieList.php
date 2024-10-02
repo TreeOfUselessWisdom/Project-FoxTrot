@@ -1,8 +1,10 @@
 <?php
-include 'aside.php';
+session_start();
 include 'db.php';
+include 'aside.php';
 ?>
 
+<!-- Rest of your MovieList.php file content here -->
 <!-- ============================================-->
 <!-- <section> begin ============================-->
 <section class="pt-5" id="destination">
