@@ -1,0 +1,2 @@
+*.scss filter=lfs diff=lfs merge=lfs -text
+FilmFare/src/scss/theme/helpers/_text.scss filter=lfs diff=lfs merge=lfs -text

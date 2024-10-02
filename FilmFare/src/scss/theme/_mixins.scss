@@ -1,15 +1,3 @@
-@mixin hover-focus() {
-  &:hover,
-  &:focus {
-    @content;
-  }
-}
-
-@mixin round-btn($height){
-  height: $height;
-  width: $height;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5a88dd35cddc10beded3d1d0f46e57a0e021ab57ce9db4f6a23e6f2122cbe0cf
+size 234

@@ -1,15 +1,3 @@
-@each $color, $value in $grays {
-  .link-#{$color} {
-    color: $value !important;
-
-    &:hover,
-    &:focus {
-      @if $color == '900' {
-        color: $primary !important;
-      } @else {
-        color: lighten($value, 15%) !important;
-      }
-    }
-  }
-}
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:ca87fefca2ab04ac494940107984b920c38055c9862d5cc79ba2ec49f9a0f5f0
+size 275
