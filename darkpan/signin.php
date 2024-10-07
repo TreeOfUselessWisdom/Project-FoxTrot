@@ -1,18 +1,33 @@
 <?php
-// Start the session
-session_start();
+// Check if the session is already started
+if (!session_id()) {
+    session_start();
+}
 
 // Include the database connection file
 include 'db.php';
 
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit;
+}
+
+
 // Check if the form has been submitted
 if (isset($_POST['login'])) {
     // Get the email and password from the form
-    $email = $_POST['email'];
+    $email = $_POST['username'];
     $password = $_POST['password'];
 
+    // Validate user input
+    if (empty($email) || empty($password)) {
+        echo "Please enter both email and password.";
+        exit;
+    }
+
     // Check if the email and password are valid
-    $query = "SELECT * FROM admins WHERE email = ?";
+    $query = "SELECT * FROM admins WHERE username = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
@@ -24,7 +39,7 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row['password'])) {
             // Set the session variables
             $_SESSION['user_id'] = $row['id'];
-            $_SESSION['email'] = $email; // Set the email variable to the actual email
+            $_SESSION['username'] = $email;
 
             // Redirect the user to the dashboard
             header("Location: index.php");
@@ -34,9 +49,11 @@ if (isset($_POST['login'])) {
         }
     } else {
         echo "Invalid email or password.";
-    }   
+    }
 }
 ?>
+
+
 
 
 <!DOCTYPE html>

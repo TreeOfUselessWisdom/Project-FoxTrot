@@ -1,6 +1,4 @@
 <?php
-// Start the session
-session_start();
 
 // Include the database connection file
 include 'db.php';
@@ -11,6 +9,12 @@ if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+
+    // Validate user input
+    if (empty($username) || empty($email) || empty($password)) {
+        echo "Please enter all fields.";
+        exit;
+    }
 
     // Check if the username and email are already taken
     $query = "SELECT * FROM admins WHERE username = ? OR email = ?";
@@ -42,6 +46,8 @@ if (isset($_POST['register'])) {
     }
 }
 ?>
+
+
 
 
 

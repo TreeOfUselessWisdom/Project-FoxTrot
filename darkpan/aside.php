@@ -1,3 +1,37 @@
+<?php
+
+// Include the database connection file
+include 'db.php';
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: signin.php");
+    exit;
+}
+
+// Get the user information from the database
+$query = "SELECT * FROM admins WHERE id = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$row = mysqli_fetch_assoc($result);
+
+// Check if the user information was retrieved successfully
+if ($row) {
+    // Display the user information
+    if (isset($_SESSION['username'])) {
+        echo "Welcome, " . $_SESSION['username'] . "!";
+    } else {
+        echo "Welcome, Guest!";
+    }
+} else {
+    // Handle the case where the user information was not retrieved
+    echo "Welcome, Guest!";
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">

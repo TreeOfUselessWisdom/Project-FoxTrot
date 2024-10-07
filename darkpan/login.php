@@ -1,6 +1,5 @@
 <?php
-// Start the session
-session_start();
+
 
 // Include the database connection file
 include 'db.php';
@@ -10,6 +9,12 @@ if (isset($_POST['login'])) {
     // Get the username and password from the form
     $username = $_POST['username'];
     $password = $_POST['password'];
+
+    // Validate user input
+    if (empty($username) || empty($password)) {
+        echo "Please enter both username and password.";
+        exit;
+    }
 
     // Check if the username and password are valid
     $query = "SELECT * FROM users WHERE username = ?";
