@@ -17,18 +17,7 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
 
-// Check if the user information was retrieved successfully
-if ($row) {
-    // Display the user information
-    if (isset($_SESSION['username'])) {
-        echo "Welcome, " . $_SESSION['username'] . "!";
-    } else {
-        echo "Welcome, Guest!";
-    }
-} else {
-    // Handle the case where the user information was not retrieved
-    echo "Welcome, Guest!";
-}
+
 
 ?>
 
