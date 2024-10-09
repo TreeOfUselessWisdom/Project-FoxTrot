@@ -120,14 +120,10 @@ if (isset($_POST['register'])) {
                                 <label for="floatingPassword">Password</label>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
                                 <a href="">Forgot Password</a>
                             </div>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="register">Sign Up</button>
-                            <p class="text-center mb-0">Already have an Account? <a href="signin.php">Sign In</a></p>
+                            <p class="text-center mb-0">Already have an Account? <a href="login.php">Sign In</a></p>
                         </div>
                     </div>
                 </div>

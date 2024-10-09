@@ -3,22 +3,29 @@
 // Include the database connection file
 include 'db.php';
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: signin.php");
-    exit;
-}
-
 // Get the user information from the database
 $query = "SELECT * FROM admins WHERE id = ?";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
 mysqli_stmt_execute($stmt);
+
+// Check if the query was executed successfully
+if (mysqli_stmt_errno($stmt)) {
+    echo "Error: " . mysqli_stmt_error($stmt);
+    exit;
+}
+
 $result = mysqli_stmt_get_result($stmt);
+if ($result === false) {
+    echo "Error: Unable to retrieve user information.";
+    exit;
+}
+
 $row = mysqli_fetch_assoc($result);
-
-
-
+if ($row === null) {
+    echo "Error: User information not found.";
+    exit;
+}
 ?>
 
 
@@ -77,18 +84,8 @@ $row = mysqli_fetch_assoc($result);
             <span>Admin</span>
         </div>
     </div>
-<?php } else { ?>
-    <div class="d-flex align-items-center ms-4 mb-4">
-        <div class="position-relative">
-            <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-        </div>
-        <div class="ms-3">
-            <h6 class="mb-0">Guest</h6>
-            <span>Please login to access more features.</span>
-        </div>
-    </div>
 <?php } ?>
+
                 <div class="navbar-nav w-100">
                     <a href="index.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
@@ -106,17 +103,7 @@ $row = mysqli_fetch_assoc($result);
                     <a href="signin.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign In</a>
                     <a href="signup.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign Up</a>
                     <a href="AddMovie.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Add movie</a>
-                    <a href="EditMovie.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Edit movie</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.php" class="dropdown-item">Sign In</a>
-                            <a href="signup.php" class="dropdown-item">Sign Up</a>
-                            <a href="AddMovie.php" class="dropdown-item">Add movie</a>
-                            <a href="EditMovie.php" class="dropdown-item">Edit movie</a>
-
-                        </div>
-                    </div>
+                    <a href="Purchases.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Purchases</a>
                 </div>
             </nav>
         </div>

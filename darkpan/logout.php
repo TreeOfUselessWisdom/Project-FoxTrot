@@ -11,6 +11,6 @@ unset($_SESSION['email']);
 session_destroy();
 
 // Redirect the user to the login page
-header("Location: signin.php");
+header("Location: login.php");
 exit;
 ?>

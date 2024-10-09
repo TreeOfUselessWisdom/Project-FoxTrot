@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 ?>
-
+      <section>
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end">
@@ -15,19 +15,6 @@ include 'db.php';
               <div class="text-center text-md-start">
                 <a class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow" href="#!" role="button">Discover More</a>
                 <div class="w-100 d-block d-md-none"></div>
-                <a href="#!" role="button" data-bs-toggle="modal" data-bs-target="#popupVideo">
-                  <span class="btn btn-danger round-btn-lg rounded-circle me-3 danger-btn-shadow">
-                    <img src="assets/img/hero/play.svg" width="15" alt="play" />
-                  </span>
-                </a>
-                <span class="fw-medium">Watch Trailer</span>
-                <div class="modal fade" id="popupVideo" tabindex="-1" aria-labelledby="popupVideo" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                      <iframe class="rounded" style="width:100%;max-height:500px;" height="500px" src="https://www.youtube.com/embed/_lhdhL4UDIo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -125,20 +112,25 @@ include 'db.php';
                     <span class="fs-1 fw-medium"><?php echo number_format($movie_price, 2) . ' Rs'; ?></span>
                   </div>
                   <div class="mt-2">
-                    <span class="fs-1 fw-medium">
-                      <?php
-                      $stars = '';
-                      for ($i = 0; $i < 5; $i++) {
-                          if ($i < $rating) {
-                              $stars .= '<i class="fas fa-star"></i>';
-                          } else {
-                              $stars .= '<i class="far fa-star"></i>';
-                          }
-                      }
-                      echo $stars . ' (' . $rating . '/5)';
-                      ?>
-                    </span>
-                  </div>
+                <span class="fs-1 fw-medium">
+                    <?php
+                    $rating = round($rating); 
+                    $stars = '';
+                    for ($i = 0; $i < 5; $i++) {
+                        if ($i < $rating) {
+                            $stars .= '<i class="fas fa-star"></i>';
+                        } else {
+                            $stars .= '<i class="far fa-star"></i>';
+                        }
+                    }
+                    if ($rating == intval($rating)) { 
+                        echo $stars . ' (' . $rating . '/5)';
+                    } else {
+                        echo $stars . ' (' . number_format($rating, 1) . '/5)';
+                    }
+                    ?>
+                </span>
+            </div>
                   <div class="d-flex align-items-center"> 
                     <img src="assets/img/dest/navigation.svg" style="margin-right: 14px" width="20" alt="navigation" />
                     <span class="fs-0 fw-medium"><?php echo $movie_description; ?></span>
@@ -154,7 +146,7 @@ include 'db.php';
             ?>
           </div>
           <div class="text-center"> 
-            <a class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow" id="Button_new" href="#!" role="button">Find more</a>
+            <a class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow" id="Button_new" href="movielist.php" role="button">Find more</a>
           </div>
         </div>
         <!-- end of .container-->
@@ -263,11 +255,11 @@ include 'db.php';
                   <div class="card-body py-4 px-3">
                     <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                       <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link" href="#!">Basic Package</a></h4>
-                      <span class="fs-1 fw-medium">5,000 Rs</span>
+                      <span class="fs-1 fw-medium">0 Rs</span>
                     </div>
                     <div class="d-flex align-items-center">
                       <img src="assets/img/dest/navigation.svg" style="margin-right: 14px" width="20" alt="navigation" />
-                      <span class="fs-0 fw-medium">Enjoy a classic experience.</span>
+                      <span class="fs-0 fw-medium">Enjoy a classic experience, now comes free with the ticket purchase</span>
                     </div>
                   </div>
                 </div>
@@ -297,7 +289,7 @@ include 'db.php';
                     </div>
                     <div class="d-flex align-items-center">
                       <img src="assets/img/dest/navigation.svg" style="margin-right: 14px" width="20" alt="navigation" />
-                      <span class="fs-0 fw-medium">Rooms Upper Level</span>
+                      <span class="fs-0 fw-medium">VIP rooms</span>
                     </div>
                   </div>
                 </div>

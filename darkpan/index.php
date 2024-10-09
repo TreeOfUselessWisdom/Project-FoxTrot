@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 // Check if the session is already started
 if (!session_id()) {
     session_start();
@@ -6,14 +9,13 @@ if (!session_id()) {
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: signin.php");
+    header("Location: login.php");
     exit;
 }
 
 // Include the aside file
 include 'aside.php';
 ?>
-
 
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
