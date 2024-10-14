@@ -137,7 +137,7 @@ if (isset($_POST['submit_review'])) {
     .seat.locked {
         background-color: #ccc; 
         color: #666;
-        pointer-events: none; /* Disable interaction for locked seats */
+        pointer-events: none; 
     }
 </style>
 
